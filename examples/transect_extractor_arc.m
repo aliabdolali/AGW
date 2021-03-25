@@ -7,7 +7,7 @@ clc
 %input
 Epi=[142.369,38.322]; %coordinare of the epicenter
 dx=0.1;       % Transect resolution
-I=20; %Index of the NDBC
+I=24; %Index of the NDBC
 new_origin=[0,-220]; %for changing the origin of plot (the default is [0 0] 
 %which plots [-180 180]; new_origin=[0,-220] is for source and destiation
 %in the pacific
@@ -44,11 +44,11 @@ display(['NDBC Coordinates = [',num2str(xNDBC(I)),' ',num2str(yNDBC(I)),']']);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[arclen,az] = distance('gc',[Epi(2),Epi(1)],[yNDBC(20),xNDBC(20)]); %[arc length, azimuth]
+[arclen,az] = distance('gc',[Epi(2),Epi(1)],[yNDBC(I),xNDBC(I)]); %[arc length, azimuth]
 npnt=floor(arclen/dx); %number of points on the arc
 waypoints=[Epi(2),Epi(1);yNDBC(i),xNDBC(i)];
-[lattrkgc,lontrkgc] = track2('gc',Epi(2),Epi(1),yNDBC(20),xNDBC(20),[1 0],'degrees',npnt);
-%az = azimuth('gc',Epi(2),Epi(1),yNDBC(20),xNDBC(20))
+[lattrkgc,lontrkgc] = track2('gc',Epi(2),Epi(1),yNDBC(I),xNDBC(I),[1 0],'degrees',npnt);
+%az = azimuth('gc',Epi(2),Epi(1),yNDBC(I),xNDBC(I))
 [lttrk,lntrk] = track('gc',waypoints,'degrees');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %extract depth along arc
@@ -72,7 +72,7 @@ scatter(xNDBC,yNDBC,'ok','filled')
 hold on
 scatter(Epi(1),Epi(2),'sb','filled')
 hold on
-scatter(xNDBC(20),yNDBC(20),'sb','filled')
+scatter(xNDBC(I),yNDBC(I),'sb','filled')
 hold on
 scatter(lontrkgc,lattrkgc,'xb')
 hold on
