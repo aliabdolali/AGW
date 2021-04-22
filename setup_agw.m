@@ -56,6 +56,10 @@ if exist([home,'/',path_tar,'/etopo1.nc'], 'file') ~= 2
 %
     delete([home,'/',bathy_file]);
 end
+%download unstr mesh for shortest path calculation
+if exist([home,'/',path_tar,'/global60_50km_unstr.msh'], 'file') ~= 2
+    urlwrite('https://drive.google.com/file/d/1OKC6aHnTf-lKwncOwBJvQ2jsxsuv2MBt/view?usp=sharing',[home,'/',path_tar,'/global60_50km_unstr.msh']);
+end
 %% Add the bin, reference path and examples to the user's matlab path
 addpath(fullfile(home, path_bin))
 addpath(fullfile(home, path_tar));
