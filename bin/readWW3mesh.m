@@ -1,4 +1,4 @@
-function [tri,x,y,z] = readWW3mesh(file,plott)
+function [tri,x,y,z,bound_node] = readWW3mesh(file,plott)
 
 %ali.abdolali@noaa.gov
 %if plot==1, then plot the mesh
@@ -13,6 +13,7 @@ element_id     = dlmread(file,'',[8+N_n 0 8+N_e+N_n-1 0]);
 
 nodes       = dlmread(file,'',[5 1 4+N_n 3]);
 TRI    = dlmread(file,'',[8+N_n 0 8+N_e+N_n-1 8]);
+
 
 %------- 2D Geometry
 
@@ -37,7 +38,12 @@ end
    z=nodes(:,3);
    
    
-   %%
+% figure out the boundary data (XYC)
+   BPFLAG=TRI(:,2)==15;
+   bound_node_indx=TRI(BPFLAG, 6);
+   bound_node.x=x(bound_node_indx);
+   bound_node.y=y(bound_node_indx);
+   bound_node.z=z(bound_node_indx);
    
    if plott==1;
 width=880;  % Width of figure for movie [pixels]
@@ -54,7 +60,7 @@ cmap = colormap;
 trisurf(tri,x,y,z);
 shading interp
 view(2)
-hcb=colorbar
+hcb=colorbar;
 caxis([min(z) max(z)])
 title(hcb,'[m]','fontsize',14);
 colormap(jet)
