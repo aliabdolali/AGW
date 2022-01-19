@@ -52,7 +52,7 @@ clas=1;
 magnitude=7.07;
 %% READ THE FILE AND SET SPECIFICATIONS OF HYDROPHONE
 current_f=pwd;
-cd (['../reference_data/MATLAB_signal/'])
+cd(['reference_data/MATLAB_signal/'])
 x = dir('mag_74_21_12_2010.txt');
 fileID = fopen(x.name,'r');
 
